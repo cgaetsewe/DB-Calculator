@@ -13,27 +13,25 @@
         <div class="">
           <label class="title">dB Calculator<span></label>
         </div>
-        <ul>
+        <ul id="form-inputs">
           <div class="grid-container">
             <li>Input Power
-              <div class="padding-top-bot">
-                <input autocomplete="off" value="0" class="input" id="input-power" onclick="this.select()">
+              <div class="padding-top-bot"><input autocomplete="off" value="0" class="input" id="input-power" onclick="this.select()">
                 <select name="units" id="units">
                   <option value="dBm">dBm</option>
                   <option value="dBW">dBW</option>
                   <option value="W">W</option>
                 </select>  
               <span id="input-capture">0.0dBm</span>
-              <a class="clr" href=""><i class="fas fa-minus-circle"></i></a></td>
+              <a class="clr" href="">CE</a></td>
               </div>
             </li>
           </div>
           <div class="grid-container">
             <li>Gain/Loss
-              <div class="padding-top-bot">
-                <input autocomplete="off" value="0" class="input gain" id="gain-loss" onclick="this.select()">
+              <div class="padding-top-bot"><input autocomplete="off" value="0" class="input gain" id="gain-loss" onclick="this.select()">
                 <span id="gain-capture">0.0dB</span>
-                <a class="clr" href=""><i class="fas fa-minus-circle"></i></a>
+                <a class="clr" href="">CE</a>
               </div>
             </li> 
           </div>
@@ -43,7 +41,7 @@
             <li class="grid-item" id="W">1.0mW</li>
           </div>
         </ul>
-        <button class="button" type="submit" id="submit">Submit</button>
+        <button class="button" type="submit" id="submit" name="mySubmit">Submit</button>
       </form>
     </div>
     <script src="app.js"></script>

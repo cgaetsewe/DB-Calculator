@@ -14,6 +14,19 @@ class UI {
         ui.convertDbmToW(outputPowerinDbm);
         ui.convertDbmToDbW(outputPowerinDbm);
     }
+    convertToDbm = function(inputs) {
+        const inputPower_units = document.getElementById('units').value;
+        switch(inputPower_units) {
+            case 'dBW':
+                inputs.inputPower = inputs.inputPower + 30;
+                break;
+            case 'W':
+                inputs.inputPower = 10 * Math.log10(1000 * inputs.inputPower);
+                break;
+            default:
+            }
+        return inputs;
+    }
     convertDbmToW(outputPowerinDbm) {
         let outputPowerinW = 0.001 * Math.pow(10, (outputPowerinDbm/10));
         switch(true) {
@@ -39,11 +52,18 @@ class UI {
                 break;
             default:
                 document.getElementById('W').innerHTML = outputPowerinW.toFixed(1) + ' W';
-    }
+        }
     }
     convertDbmToDbW(outputPowerinDbm) {
         const outputPowerinDbW = outputPowerinDbm - 30;
         document.getElementById('dBW').innerHTML = outputPowerinDbW.toFixed(1) + 'dBW';
+    }
+    resetValue(target) {
+        const ui = new UI();
+        if(target.className === "clr") {
+            target.parentElement.firstChild.value = 0;
+            document.getElementById('form').mySubmit.click();
+        }
     }
     clearInputs() {
         document.getElementById('input-power').value = '0.0';
@@ -63,24 +83,17 @@ document.getElementById('form').addEventListener('submit', function(e) {
     const inputs = new Inputs(inputPower, gainLoss);
     
     if(inputPower_units !== 'dBm') {
-        convertToDbm(inputs);
+        ui.convertToDbm(inputs);
     }
     ui.calculateOutputPowerdBm(inputs);
     e.preventDefault();
 });
-const convertToDbm = function(inputs) {
-    const inputPower_units = document.getElementById('units').value;
-    switch(inputPower_units) {
-        case 'dBW':
-            inputs.inputPower = inputs.inputPower + 30;
-            break;
-        case 'W':
-            inputs.inputPower = 10 * Math.log10(1000 * inputs.inputPower);
-            break;
-        default:
-        }
-    return inputs;
-};
+document.getElementById('form-inputs').addEventListener('click', function(e) {
+    const ui = new UI();
+    ui.resetValue(e.target);
+    e.preventDefault();
+})
+
 
 
 
