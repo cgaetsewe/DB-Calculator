@@ -1,12 +1,13 @@
 body {
   background-color: grey;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0rem;
 }
 .float-left {
     margin-left: 8rem;
 }
 .container {
-    width: 25rem;
+    width: 23.5rem;
     background-color: cornflowerblue;
     border-radius: 0.5rem;
     margin: auto;
