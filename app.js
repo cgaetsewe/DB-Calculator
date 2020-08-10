@@ -30,17 +30,17 @@ class UI {
     convertDbmToW(outputPowerinDbm) {
         let outputPowerinW = 0.001 * Math.pow(10, (outputPowerinDbm/10));
         switch(true) {
-            case outputPowerinDbm >= 120:
+            case outputPowerinDbm > 120:
                 outputPowerinW = outputPowerinW / 1000000000;
-                document.getElementById('W').innerHTML = outputPowerinW.toFixed(0) + ' GW';
+                document.getElementById('W').innerHTML = '>1.0' + 'GW';
                 break;
             case outputPowerinDbm >= 90 && outputPowerinDbm < 120:
                 outputPowerinW = outputPowerinW / 1000000;
-                document.getElementById('W').innerHTML = outputPowerinW.toFixed(1) + ' MW';
+                document.getElementById('W').innerHTML = outputPowerinW.toFixed(1) + 'MW';
                 break;
             case outputPowerinDbm >= 60 && outputPowerinDbm < 90:
                 outputPowerinW = outputPowerinW / 1000;
-                document.getElementById('W').innerHTML = outputPowerinW.toFixed(1) + ' KW'; 
+                document.getElementById('W').innerHTML = outputPowerinW.toFixed(1) + 'KW'; 
                 break;
             case outputPowerinDbm >= 0 && outputPowerinDbm < 30:
                 outputPowerinW = outputPowerinW * 1000;
@@ -48,10 +48,10 @@ class UI {
                 break;
             case outputPowerinDbm < 0:
                 outputPowerinW = outputPowerinW * 1000000;
-                document.getElementById('W').innerHTML = outputPowerinW.toFixed(3) + ' uW';
+                document.getElementById('W').innerHTML = outputPowerinW.toFixed(3) + 'uW';
                 break;
             default:
-                document.getElementById('W').innerHTML = outputPowerinW.toFixed(1) + ' W';
+                document.getElementById('W').innerHTML = outputPowerinW.toFixed(1) + 'W';
         }
     }
     convertDbmToDbW(outputPowerinDbm) {
