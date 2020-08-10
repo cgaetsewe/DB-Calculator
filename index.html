@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <title>DB_Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="form" id="form">
+        <div class="">
+          <label class="title">dB Calculator<span></label>
+        </div>
+        <ul>
+          <div class="grid-container">
+            <li>Input Power
+              <div class="padding-top-bot">
+                <input autocomplete="off" value="0" class="input" id="input-power" onclick="this.select()">
+                <select name="units" id="units">
+                  <option value="dBm">dBm</option>
+                  <option value="dBW">dBW</option>
+                  <option value="W">W</option>
+                </select>  
+              <span id="input-capture">0.0dBm</span>
+              <a class="clr" href=""><i class="fas fa-minus-circle"></i></a></td>
+              </div>
+            </li>
+          </div>
+          <div class="grid-container">
+            <li>Gain/Loss
+              <div class="padding-top-bot">
+                <input autocomplete="off" value="0" class="input gain" id="gain-loss" onclick="this.select()">
+                <span id="gain-capture">0.0dB</span>
+                <a class="clr" href=""><i class="fas fa-minus-circle"></i></a>
+              </div>
+            </li> 
+          </div>
+          <div class="grid-container">
+            <li class="grid-item" id="dBm">0.0dBm</li>
+            <li class="grid-item" id="dBW">-30.0dBW</li>
+            <li class="grid-item" id="W">1.0mW</li>
+          </div>
+        </ul>
+        <button class="button" type="submit" id="submit">Submit</button>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
