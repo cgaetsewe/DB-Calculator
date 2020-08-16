@@ -30,7 +30,7 @@
           </div>
           <div class="grid-container">
             <li>Gain
-              <div class="padding-top-bot"><input autocomplete="off" value="0" class="input gain" id="gain" onclick="this.select()">
+              <div class="padding-top-bot"><input autocomplete="off" value="0" type="number" oninput="this.value = Math.abs(this.value)" class="input gain" id="gain" onclick="this.select()">
                 <span id="gain-capture">0.0dB</span>
                 <a class="clr" href="">CE</a>
               </div>
@@ -39,7 +39,7 @@
 
           <div class="grid-container">
             <li>Loss
-              <div class="padding-top-bot"><input autocomplete="off" value="0" class="input loss" id="loss" onclick="this.select()">
+              <div class="padding-top-bot"><input autocomplete="off" value="0" type="number" oninput="this.value = Math.abs(this.value)" class="input loss" id="loss" onclick="this.select()">
                 <span id="loss-capture">0.0dB</span>
                 <a class="clr" href="">CE</a>
               </div>
