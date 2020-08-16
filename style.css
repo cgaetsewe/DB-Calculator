@@ -46,7 +46,7 @@ button {
     color: black;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    width: 100%;
+    width: 18.5rem;
 }
 button:active {
     background-color: grey;
@@ -81,7 +81,7 @@ li {
     border-width: 0.5px;
     border-radius: 0.5rem;
 }
-#gain-capture {
+#gain-capture, #loss-capture {
     padding: 0.1rem 0.4rem;
     margin-left: 0rem;
     border-style: solid;
@@ -90,7 +90,8 @@ li {
     border-radius: 0.5rem;
 }
 .grid-item {
-    width: auto;
+    width: 5.5rem;
+    height: 1rem;
     margin: 0px 1px;
 }
 select {

@@ -21,6 +21,7 @@
                   <option value="dBm">dBm</option>
                   <option value="dBW">dBW</option>
                   <option value="W">W</option>
+                  <option value="mW">mW</option>
                 </select>  
               <span id="input-capture">0.0dBm</span>
               <a class="clr" href="">CE</a></td>
@@ -28,20 +29,32 @@
             </li>
           </div>
           <div class="grid-container">
-            <li>Gain/Loss
-              <div class="padding-top-bot"><input autocomplete="off" value="0" class="input gain" id="gain-loss" onclick="this.select()">
+            <li>Gain
+              <div class="padding-top-bot"><input autocomplete="off" value="0" class="input gain" id="gain" onclick="this.select()">
                 <span id="gain-capture">0.0dB</span>
                 <a class="clr" href="">CE</a>
               </div>
             </li> 
           </div>
+
+          <div class="grid-container">
+            <li>Loss
+              <div class="padding-top-bot"><input autocomplete="off" value="0" class="input loss" id="loss" onclick="this.select()">
+                <span id="loss-capture">0.0dB</span>
+                <a class="clr" href="">CE</a>
+              </div>
+            </li> 
+          </div>
+
           <div class="grid-container">
             <li class="grid-item" id="dBm">0.0dBm</li>
             <li class="grid-item" id="dBW">-30.0dBW</li>
             <li class="grid-item" id="W">1.0mW</li>
           </div>
+          <div class="grid-container">
+            <button class="button" type="submit" id="submit" name="mySubmit">Submit</button>
+          </div>
         </ul>
-        <button class="button" type="submit" id="submit" name="mySubmit">Submit</button>
       </form>
     </div>
     <script src="app.js"></script>

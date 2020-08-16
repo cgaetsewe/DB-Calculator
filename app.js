@@ -1,15 +1,17 @@
 class Inputs {
-    constructor(inputPower, gainLoss) {
+    constructor(inputPower, gain, loss) {
         this.inputPower = inputPower;
-        this.gainLoss = gainLoss;
+        this.gain = gain;
+        this.loss = loss;
     }
 }
 class UI {
     calculateOutputPowerdBm(inputs) {
-        const outputPowerinDbm = inputs.inputPower + inputs.gainLoss;
+        const outputPowerinDbm = inputs.inputPower + inputs.gain + (-inputs.loss);
         document.getElementById('dBm').innerHTML = outputPowerinDbm.toFixed(1) + 'dBm';
         document.getElementById('input-capture').innerHTML = inputs.inputPower.toFixed(1) + 'dBm';
-        document.getElementById('gain-capture').innerHTML = inputs.gainLoss.toFixed(1) + 'dB';
+        document.getElementById('gain-capture').innerHTML = inputs.gain.toFixed(1) + 'dB';
+        document.getElementById('loss-capture').innerHTML = inputs.loss.toFixed(1) + 'dB';
         const ui = new UI();
         ui.convertDbmToW(outputPowerinDbm);
         ui.convertDbmToDbW(outputPowerinDbm);
@@ -22,6 +24,9 @@ class UI {
                 break;
             case 'W':
                 inputs.inputPower = 10 * Math.log10(1000 * inputs.inputPower);
+                break;
+            case 'mW':
+                inputs.inputPower = (10 * Math.log10(1000 * inputs.inputPower)-30);
                 break;
             default:
             }
@@ -67,24 +72,28 @@ class UI {
     }
     clearInputs() {
         document.getElementById('input-power').value = '0.0';
-        document.getElementById('gain-loss').value = '0.0';
+        document.getElementById('gain').value = '0.0';
+        document.getElementById('loss').value = '0.0';
         document.getElementById('dBm').innerHTML = '0.0' + 'dBm';
         document.getElementById('dBW').innerHTML = '-30.0' + 'dBW';
         document.getElementById('W').innerHTML = '1.0' + 'mW';
         document.getElementById('input-capture').innerHTML = '0.0' + 'dBm';
         document.getElementById('gain-capture').innerHTML = '0.0' + 'dB';
+        document.getElementById('loss-capture').innerHTML = '0.0' + 'dB';
     }
 }
-document.getElementById('form').addEventListener('submit', function(e) {
+document.getElementById('submit').addEventListener('click', function(e) {
     let inputPower = parseFloat(document.getElementById('input-power').value);
-    let gainLoss = parseFloat(document.getElementById('gain-loss').value);
+    let gain = parseFloat(document.getElementById('gain').value);
+    let loss = parseFloat(document.getElementById('loss').value);
     const inputPower_units = document.getElementById('units').value;
     const ui = new UI();
-    const inputs = new Inputs(inputPower, gainLoss);
+    const inputs = new Inputs(inputPower, gain, loss);
     
     if(inputPower_units !== 'dBm') {
         ui.convertToDbm(inputs);
     }
+    console.log(inputs.inputPower);
     ui.calculateOutputPowerdBm(inputs);
     e.preventDefault();
 });
