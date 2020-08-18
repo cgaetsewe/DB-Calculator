@@ -43,6 +43,9 @@ form {
     border-style: solid;
     border-width: 1px;
 }
+a:active {
+    color: cornsilk;
+}
 button {
     background-color: coral;
     border-color: cornflowerblue;
@@ -54,7 +57,7 @@ button {
     width: 18.5rem;
 }
 button:active {
-    background-color: grey;
+    background-color: black;
     color: cornsilk;
 }
 ul {
