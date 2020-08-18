@@ -35,7 +35,7 @@ class UI {
     convertDbmToW(outputPowerinDbm) {
         let outputPowerinW = 0.001 * Math.pow(10, (outputPowerinDbm/10));
         switch(true) {
-            case outputPowerinDbm > 120:
+            case outputPowerinDbm >= 120:
                 outputPowerinW = outputPowerinW / 1000000000;
                 document.getElementById('W').innerHTML = '>1.0' + 'GW';
                 break;
