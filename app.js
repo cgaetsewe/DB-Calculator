@@ -71,9 +71,9 @@ class UI {
         }
     }
     clearInputs() {
-        document.getElementById('input-power').value = '0.0';
-        document.getElementById('gain').value = '0.0';
-        document.getElementById('loss').value = '0.0';
+        document.getElementById('input-power').value = '0';
+        document.getElementById('gain').value = '0';
+        document.getElementById('loss').value = '0';
         document.getElementById('dBm').innerHTML = '0.0' + 'dBm';
         document.getElementById('dBW').innerHTML = '-30.0' + 'dBW';
         document.getElementById('W').innerHTML = '1.0' + 'mW';
@@ -89,17 +89,20 @@ document.getElementById('submit').addEventListener('click', function(e) {
     const inputPower_units = document.getElementById('units').value;
     const ui = new UI();
     const inputs = new Inputs(inputPower, gain, loss);
-    
     if(inputPower_units !== 'dBm') {
         ui.convertToDbm(inputs);
     }
-    console.log(inputs.inputPower);
     ui.calculateOutputPowerdBm(inputs);
     e.preventDefault();
 });
 document.getElementById('form-inputs').addEventListener('click', function(e) {
     const ui = new UI();
     ui.resetValue(e.target);
+    e.preventDefault();
+})
+document.getElementById('ac').addEventListener('click', function(e) {
+    const ui = new UI();
+    ui.clearInputs();
     e.preventDefault();
 })
 

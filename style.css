@@ -47,18 +47,22 @@ a:active {
     color: cornsilk;
 }
 button {
-    background-color: coral;
-    border-color: cornflowerblue;
+    background-color: black;
+    border-color: black;
     font-size: medium;
     outline: none;
-    color: black;
+    color: coral;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    width: 18.5rem;
+    width: 9.2rem;
+}
+button:hover {
+    background-color: coral;
+    color: black;
 }
 button:active {
     background-color: black;
-    color: cornsilk;
+    color: coral;
 }
 ul {
     width:auto;
