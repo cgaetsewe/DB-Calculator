@@ -7,6 +7,7 @@ class Inputs {
 }
 class UI {
     calculateOutputPowerdBm(inputs) {
+        localStorage.setItem('inputs',JSON.stringify(inputs));
         const outputPowerinDbm = inputs.inputPower + inputs.gain + (-inputs.loss);
         document.getElementById('dBm').innerHTML = outputPowerinDbm.toFixed(1) + 'dBm';
         document.getElementById('input-capture').innerHTML = inputs.inputPower.toFixed(1) + 'dBm';
@@ -17,8 +18,8 @@ class UI {
         ui.convertDbmToDbW(outputPowerinDbm);
     }
     convertToDbm = function(inputs) {
-        const inputPower_units = document.getElementById('units').value;
-        switch(inputPower_units) {
+        const units = document.getElementById('units').value;
+        switch(units) {
             case 'dBW':
                 inputs.inputPower = inputs.inputPower + 30;
                 break;
@@ -64,13 +65,13 @@ class UI {
         document.getElementById('dBW').innerHTML = outputPowerinDbW.toFixed(1) + 'dBW';
     }
     resetValue(target) {
-        const ui = new UI();
         if(target.className === "clr") {
             target.parentElement.firstChild.value = 0;
             document.getElementById('form').mySubmit.click();
         }
     }
     clearInputs() {
+        localStorage.clear();
         document.getElementById('input-power').value = '0';
         document.getElementById('gain').value = '0';
         document.getElementById('loss').value = '0';
@@ -82,19 +83,31 @@ class UI {
         document.getElementById('loss-capture').innerHTML = '0.0' + 'dB';
     }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const ui = new UI();
+    if(localStorage.getItem('inputs') === null) {
+        return;
+    } else {
+        inputs = JSON.parse(localStorage.getItem('inputs'));
+    }
+    document.getElementById('input-power').value = inputs.inputPower;
+    document.getElementById('gain').value = inputs.gain;
+    document.getElementById('loss').value = inputs.loss;
+    ui.calculateOutputPowerdBm(inputs);
+})
 document.getElementById('submit').addEventListener('click', function(e) {
     let inputPower = parseFloat(document.getElementById('input-power').value);
     let gain = parseFloat(document.getElementById('gain').value);
     let loss = parseFloat(document.getElementById('loss').value);
-    const inputPower_units = document.getElementById('units').value;
+    const units = document.getElementById('units').value;
     const ui = new UI();
-    const inputs = new Inputs(inputPower, gain, loss);
-    if(inputPower_units !== 'dBm') {
+    const inputs = new Inputs(inputPower, gain, loss,);
+    if(units !== 'dBm') {
         ui.convertToDbm(inputs);
     }
     ui.calculateOutputPowerdBm(inputs);
     e.preventDefault();
-});
+})
 document.getElementById('form-inputs').addEventListener('click', function(e) {
     const ui = new UI();
     ui.resetValue(e.target);
@@ -105,13 +118,3 @@ document.getElementById('ac').addEventListener('click', function(e) {
     ui.clearInputs();
     e.preventDefault();
 })
-
-
-
-
-
-
-
-
-
-
