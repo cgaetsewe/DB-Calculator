@@ -6,8 +6,8 @@ class Inputs {
     }
 }
 class UI {
-    calculateOutputPowerdBm(inputs) {
-        localStorage.setItem('inputs',JSON.stringify(inputs));
+    calculateOutputPowerdBm(inputs, index) {
+        document.getElementById('units').selectedIndex = index;
         const outputPowerinDbm = inputs.inputPower + inputs.gain + (-inputs.loss);
         document.getElementById('dBm').innerHTML = outputPowerinDbm.toFixed(1) + 'dBm';
         document.getElementById('input-capture').innerHTML = inputs.inputPower.toFixed(1) + 'dBm';
@@ -17,21 +17,20 @@ class UI {
         ui.convertDbmToW(outputPowerinDbm);
         ui.convertDbmToDbW(outputPowerinDbm);
     }
-    convertToDbm = function(inputs) {
-        const units = document.getElementById('units').value;
-        switch(units) {
-            case 'dBW':
+    convertToDbm = function(inputs, index) { 
+        switch(index) {
+            case 1:
                 inputs.inputPower = inputs.inputPower + 30;
                 break;
-            case 'W':
+            case 2:
                 inputs.inputPower = 10 * Math.log10(1000 * inputs.inputPower);
                 break;
-            case 'mW':
+            case 3:
                 inputs.inputPower = (10 * Math.log10(1000 * inputs.inputPower)-30);
                 break;
             default:
             }
-        return inputs;
+        return;
     }
     convertDbmToW(outputPowerinDbm) {
         let outputPowerinW = 0.001 * Math.pow(10, (outputPowerinDbm/10));
@@ -81,6 +80,7 @@ class UI {
         document.getElementById('input-capture').innerHTML = '0.0' + 'dBm';
         document.getElementById('gain-capture').innerHTML = '0.0' + 'dB';
         document.getElementById('loss-capture').innerHTML = '0.0' + 'dB';
+        document.getElementById('units').selectedIndex = 0;
     }
 }
 document.addEventListener('DOMContentLoaded', function() {
@@ -89,25 +89,32 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     } else {
         inputs = JSON.parse(localStorage.getItem('inputs'));
+        index = localStorage.getItem('index');
     }
     document.getElementById('input-power').value = inputs.inputPower;
     document.getElementById('gain').value = inputs.gain;
     document.getElementById('loss').value = inputs.loss;
-    ui.calculateOutputPowerdBm(inputs);
+    if(index !== 0) {
+        ui.convertToDbm(inputs, Number(index));
+    }
+    ui.calculateOutputPowerdBm(inputs, index);
 })
-document.getElementById('submit').addEventListener('click', function(e) {
+document.getElementById('submit').addEventListener('click', calculator);
+function calculator(inputs) {
     let inputPower = parseFloat(document.getElementById('input-power').value);
     let gain = parseFloat(document.getElementById('gain').value);
     let loss = parseFloat(document.getElementById('loss').value);
-    const units = document.getElementById('units').value;
+    let index = document.getElementById('units').selectedIndex;
     const ui = new UI();
-    const inputs = new Inputs(inputPower, gain, loss,);
-    if(units !== 'dBm') {
-        ui.convertToDbm(inputs);
+    inputs = new Inputs(inputPower, gain, loss);
+    localStorage.setItem('inputs',JSON.stringify(inputs));
+    localStorage.setItem('index', index);
+
+    if(index !== 0) {
+        ui.convertToDbm(inputs, index);
     }
-    ui.calculateOutputPowerdBm(inputs);
-    e.preventDefault();
-})
+    ui.calculateOutputPowerdBm(inputs, index);
+}
 document.getElementById('form-inputs').addEventListener('click', function(e) {
     const ui = new UI();
     ui.resetValue(e.target);
